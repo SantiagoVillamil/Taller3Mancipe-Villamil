@@ -1,0 +1,23 @@
+---
+title: "Taller 3"
+author: "Alejandra Mancipe, Santiago Villamil"
+date: "11/5/2021"
+output: word_document
+---
+
+```{r}
+library(wbstats)
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(writexl)
+library(stats)
+```
+```{r}
+data <- wb_data(c("NE.CON.PRVT.PC.KD","NY.GNP.PCAP.KD","SL.UEM.TOTL.ZS","NY.GDP.PCAP.KD"), start_date = 2006, end_date = 2010)
+data <- select(data, iso3c, country, date, NE.CON.PRVT.PC.KD, NY.GNP.PCAP.KD, SL.UEM.TOTL.ZS, NY.GDP.PCAP.KD)
+data <- data %>% filter(str_detect(iso3c, "USA|COL|BOL|MEX|DEU|ROU|FRA|GBR|ZAF|GHA|NGA|
+|JPN|CHN|VNM|KOR|AUS"))
+colnames(data) <- c("iso3c", "country", "date", "consum", "income", "unemp", "gdppc")
+```
+
